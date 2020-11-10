@@ -43,10 +43,19 @@ async function main() {
     console.log("What are you talking about ...");
     main();
   } else {
-    // console.log(password);
     console.log("Credentials: ", password.name);
     console.log("Password: ", password.pwd);
   }
+  const newCreds = {
+    banking: {
+      name: "Sparkasse",
+      pwd: "12345",
+    },
+  };
+
+  // Testing Write Functionality
+  const newData = Object.assign(passwordList, newCreds);
+  await fs.writeFile("./db.json", JSON.stringify(newData));
 }
 
 // End Main App
