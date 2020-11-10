@@ -46,6 +46,8 @@ async function main() {
     console.log("Credentials: ", password.name);
     console.log("Password: ", password.pwd);
   }
+
+  // Testing Write Functionality
   const newCreds = {
     banking: {
       name: "Sparkasse",
@@ -53,7 +55,6 @@ async function main() {
     },
   };
 
-  // Testing Write Functionality
   const newData = Object.assign(passwordList, newCreds);
   await fs.writeFile("./db.json", JSON.stringify(newData));
 }
