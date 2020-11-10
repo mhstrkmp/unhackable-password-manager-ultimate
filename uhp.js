@@ -14,12 +14,39 @@ const masterQuestion = [
     message: "Just to be sure - Please enter your Master Password",
   },
 ];
+
+const whichPassword = [
+  {
+    type: "input",
+    name: "searchQuery",
+    message: "Which password are you looking for?",
+  },
+];
 // End Inquirer Questions
 
 // Start Main App
 async function main() {
   const { masterPassword } = await inquirer.prompt(masterQuestion);
-  console.log(masterPassword);
+  const passwordName = await inquirer.prompt(whichPassword);
+
+  const data = await fs.readFile("./db.json", "utf-8");
+  const passwordList = JSON.parse(data);
+  const searchPassword = passwordName["searchQuery"];
+  const password = passwordList[searchPassword];
+
+  if (masterPassword !== mpw) {
+    console.error("Do it right next time ...");
+    main();
+    return;
+  }
+  if (!password) {
+    console.log("What are you talking about ...");
+    main();
+  } else {
+    // console.log(password);
+    console.log("Credentials: ", password.name);
+    console.log("Password: ", password.pwd);
+  }
 }
 
 // End Main App
