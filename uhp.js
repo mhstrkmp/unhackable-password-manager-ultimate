@@ -1,19 +1,13 @@
-const fs = require("fs").promises;
 const inquirer = require("inquirer");
-
-const { askForMasterPassword, mainMenu } = require("./lib/interaction");
+const { askForMasterPassword, searchPassword } = require("./lib/interaction");
 
 // Start Temporary Stuff
 const mpw = "0000";
 
 // End Tempory Stuff
 
-// Start Main App
 async function main() {
   const masterPassword = await askForMasterPassword();
-
-  const data = await fs.readFile("./db.json", "utf-8");
-  const passwordList = JSON.parse(data);
 
   if (masterPassword !== mpw) {
     console.error("Do it right next time ...");
@@ -21,31 +15,24 @@ async function main() {
     return;
   }
 
-  mainMenu();
-  /* const password = passwordList[getPassword];
-  const newPassword = passwordList[setPassword];
-
-  if (!password) {
-    console.log("What are you talking about ...");
-    main();
-  } else {
-    console.log("--- Information for " + getPassword + " ---");
-    console.log("Credentials: ", password.name);
-    console.log("Password: ", password.pwd);
-  }
-
-  // Testing Write Functionality
-  const newCreds = {
-    banking: {
-      name: "Buchladen",
-      pwd: "12859035",
+  const answers = await inquirer.prompt([
+    {
+      type: "list",
+      name: "mainMenu",
+      message: "What do you want to do?",
+      choices: ["Search for a password.", "Save a new password"],
     },
-  };
+  ]);
 
-  const newData = Object.assign(passwordList, newCreds);
-  await fs.writeFile("./db.json", JSON.stringify(newData, null, 2));
-*/
+  switch (answers.mainMenu) {
+    case "Search for a password.":
+      searchPassword();
+      break;
+
+    case "Save a new password":
+      // Set Password Functionality comes here
+      console.log("Set");
+      break;
+  }
 }
-
-// End Main App
 main();
