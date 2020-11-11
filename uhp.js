@@ -15,34 +15,42 @@ const masterQuestion = [
   },
 ];
 
-const whichPassword = [
+const testQuestions = [
   {
     type: "input",
-    name: "searchQuery",
-    message: "Which password are you looking for?",
+    name: "getPassword",
+    message: "Show password for: ",
+  },
+  {
+    type: "input",
+    name: "setPassword",
+    message: "Save new Password for: ",
   },
 ];
+
 // End Inquirer Questions
 
 // Start Main App
 async function main() {
   const { masterPassword } = await inquirer.prompt(masterQuestion);
-  const passwordName = await inquirer.prompt(whichPassword);
 
   const data = await fs.readFile("./db.json", "utf-8");
   const passwordList = JSON.parse(data);
-  const searchPassword = passwordName["searchQuery"];
-  const password = passwordList[searchPassword];
 
   if (masterPassword !== mpw) {
     console.error("Do it right next time ...");
     main();
     return;
   }
+  const { getPassword, setPassword } = await inquirer.prompt(testQuestions);
+  const password = passwordList[getPassword];
+  const newPassword = passwordList[setPassword];
+
   if (!password) {
     console.log("What are you talking about ...");
     main();
   } else {
+    console.log("--- Information for " + getPassword + " ---");
     console.log("Credentials: ", password.name);
     console.log("Password: ", password.pwd);
   }
@@ -50,13 +58,13 @@ async function main() {
   // Testing Write Functionality
   const newCreds = {
     banking: {
-      name: "Sparkasse",
-      pwd: "12345",
+      name: "Buchladen",
+      pwd: "12859035",
     },
   };
 
   const newData = Object.assign(passwordList, newCreds);
-  await fs.writeFile("./db.json", JSON.stringify(newData));
+  await fs.writeFile("./db.json", JSON.stringify(newData, null, 2));
 }
 
 // End Main App
