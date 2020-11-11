@@ -1,38 +1,17 @@
-const inquirer = require("inquirer");
 const fs = require("fs").promises;
+const inquirer = require("inquirer");
+
+const { askForMasterPassword } = require("./lib/interaction");
 
 // Start Temporary Stuff
 const mpw = "0000";
 
 // End Tempory Stuff
 
-// Start Inquirer Questions
-const masterQuestion = [
-  {
-    type: "password",
-    name: "masterPassword",
-    message: "Just to be sure - Please enter your Master Password",
-  },
-];
-
-const testQuestions = [
-  {
-    type: "input",
-    name: "getPassword",
-    message: "Show password for: ",
-  },
-  {
-    type: "input",
-    name: "setPassword",
-    message: "Save new Password for: ",
-  },
-];
-
-// End Inquirer Questions
-
 // Start Main App
 async function main() {
-  const { masterPassword } = await inquirer.prompt(masterQuestion);
+  // const { masterPassword } = await inquirer.prompt(masterQuestion);
+  const masterPassword = await askForMasterPassword();
 
   const data = await fs.readFile("./db.json", "utf-8");
   const passwordList = JSON.parse(data);
