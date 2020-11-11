@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const inquirer = require("inquirer");
 
-const { askForMasterPassword } = require("./lib/interaction");
+const { askForMasterPassword, mainMenu } = require("./lib/interaction");
 
 // Start Temporary Stuff
 const mpw = "0000";
@@ -10,7 +10,6 @@ const mpw = "0000";
 
 // Start Main App
 async function main() {
-  // const { masterPassword } = await inquirer.prompt(masterQuestion);
   const masterPassword = await askForMasterPassword();
 
   const data = await fs.readFile("./db.json", "utf-8");
@@ -21,8 +20,9 @@ async function main() {
     main();
     return;
   }
-  const { getPassword, setPassword } = await inquirer.prompt(testQuestions);
-  const password = passwordList[getPassword];
+
+  mainMenu();
+  /* const password = passwordList[getPassword];
   const newPassword = passwordList[setPassword];
 
   if (!password) {
@@ -44,6 +44,7 @@ async function main() {
 
   const newData = Object.assign(passwordList, newCreds);
   await fs.writeFile("./db.json", JSON.stringify(newData, null, 2));
+*/
 }
 
 // End Main App
