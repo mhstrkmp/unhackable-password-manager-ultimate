@@ -1,0 +1,29 @@
+{
+  "name": "unhackable-password-manager-ultimate",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Simple App to learn some node.js",
+  "main": "uhp.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "crypto-js": "^4.0.0",
+    "inquirer": "^7.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhstrkmp/unhackable-password-manager-ultimate.git"
+  },
+  "keywords": [],
+  "author": "Matthias Heisterkamp",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mhstrkmp/unhackable-password-manager-ultimate/issues"
+  },
+  "homepage": "https://github.com/mhstrkmp/unhackable-password-manager-ultimate#readme"
+}
