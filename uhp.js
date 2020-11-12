@@ -1,5 +1,9 @@
 const inquirer = require("inquirer");
-const { askForMasterPassword, searchPassword } = require("./lib/interaction");
+const {
+  askForMasterPassword,
+  searchPassword,
+  newPassword,
+} = require("./lib/interaction");
 
 // Start Temporary Stuff
 const mpw = "0000";
@@ -30,8 +34,7 @@ async function main() {
       break;
 
     case "Save a new password":
-      // Set Password Functionality comes here
-      console.log("Set");
+      newPassword();
       break;
   }
 }

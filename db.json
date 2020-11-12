@@ -14,5 +14,9 @@
   "banking": {
     "name": "Buchladen",
     "pwd": "12859035"
+  },
+  "eiersalat": {
+    "name": "Horst",
+    "pwd": "3000"
   }
 }
