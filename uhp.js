@@ -4,16 +4,12 @@ const {
   searchPassword,
   newPassword,
 } = require("./lib/interaction");
-
-// Start Temporary Stuff
-const mpw = "0000";
-
-// End Tempory Stuff
+const { readMasterPassword } = require("./lib/passwords");
 
 async function main() {
   const masterPassword = await askForMasterPassword();
 
-  if (masterPassword !== mpw) {
+  if (masterPassword !== (await readMasterPassword())) {
     console.error("Do it right next time ...");
     main();
     return;
