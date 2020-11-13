@@ -28,6 +28,18 @@ async function main() {
     return password;
   }
 
+  async function updatePassword(key, login, pwd) {
+    const password = await dbCollection("passwords").updateOne(
+      { key: key },
+      {
+        $set: {
+          login: login,
+          pwd: pwd,
+        },
+      }
+    );
+    return password;
+  }
   dbClose();
 }
 
