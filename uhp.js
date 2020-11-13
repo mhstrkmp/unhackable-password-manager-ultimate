@@ -1,5 +1,11 @@
 const inquirer = require("inquirer");
 const {
+  readMongoDbPassword,
+  dbConnect,
+  dbClose,
+  dbCollection,
+} = require("./lib/database");
+const {
   askForMasterPassword,
   searchPassword,
   newPassword,
@@ -7,6 +13,12 @@ const {
 const { readMasterPassword } = require("./lib/passwords");
 
 async function main() {
+  // Start Temporary Solution
+  const password = await readMongoDbPassword();
+  const url = `mongodb+srv://mhstrkmp:${password}@cluster0.4gbgq.mongodb.net/uhp?retryWrites=true`;
+  // End Temporary Solution
+
+  await dbConnect(url, "test");
   const masterPassword = await askForMasterPassword();
 
   if (masterPassword !== (await readMasterPassword())) {
@@ -33,5 +45,6 @@ async function main() {
       newPassword();
       break;
   }
+  dbClose();
 }
 main();
