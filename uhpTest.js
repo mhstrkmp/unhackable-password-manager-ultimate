@@ -1,18 +1,10 @@
 // const inquirer = require("inquirer");
-const {
-  readMongoDbPassword,
-  dbConnect,
-  dbClose,
-  dbCollection,
-} = require("./lib/database");
+require("dotenv").config();
+
+const { dbConnect, dbClose, dbCollection } = require("./lib/database");
 
 async function main() {
-  // Start Temporary Solution
-  const passwordDb = await readMongoDbPassword();
-  const url = `mongodb+srv://mhstrkmp:${passwordDb}@cluster0.4gbgq.mongodb.net/uhp?retryWrites=true`;
-  // End Temporary Solution
-
-  await dbConnect(url, "uhp");
+  await dbConnect(process.env.DB_URI, process.env.DB_NAME);
 
   async function setPassword(key, login, pwd) {
     const password = await dbCollection("passwords").insertOne({
@@ -45,7 +37,6 @@ async function main() {
     const password = await dbCollection("passwords").deleteOne({ key });
     return password;
   }
-  await deletePassword("banking");
   dbClose();
 }
 
