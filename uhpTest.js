@@ -6,7 +6,7 @@ const { dbConnect, dbClose, dbCollection } = require("./lib/database");
 async function main() {
   await dbConnect(process.env.DB_URI, process.env.DB_NAME);
 
-  async function setPassword(key, login, pwd) {
+  async function createPassword(key, login, pwd) {
     const password = await dbCollection("passwords").insertOne({
       key,
       login,
@@ -15,7 +15,7 @@ async function main() {
     return password;
   }
 
-  async function getPassword(key) {
+  async function readPassword(key) {
     const password = await dbCollection("passwords").findOne({ key });
     return password;
   }
@@ -25,8 +25,8 @@ async function main() {
       { key: key },
       {
         $set: {
-          login: login,
-          pwd: pwd,
+          login,
+          pwd,
         },
       }
     );
@@ -37,6 +37,7 @@ async function main() {
     const password = await dbCollection("passwords").deleteOne({ key });
     return password;
   }
+
   dbClose();
 }
 
