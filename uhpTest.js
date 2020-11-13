@@ -14,17 +14,17 @@ async function main() {
 
   await dbConnect(url, "uhp");
 
-  async function getPassword(key) {
-    const password = await dbCollection("passwords").findOne({ key });
-    return password;
-  }
-
   async function setPassword(key, login, pwd) {
     const password = await dbCollection("passwords").insertOne({
       key,
       login,
       pwd,
     });
+    return password;
+  }
+
+  async function getPassword(key) {
+    const password = await dbCollection("passwords").findOne({ key });
     return password;
   }
 
@@ -40,6 +40,12 @@ async function main() {
     );
     return password;
   }
+
+  async function deletePassword(key) {
+    const password = await dbCollection("passwords").deleteOne({ key });
+    return password;
+  }
+  await deletePassword("banking");
   dbClose();
 }
 
