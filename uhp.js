@@ -30,13 +30,13 @@ async function main() {
 
   switch (answers.mainMenu) {
     case "Search for a password.":
-      searchPassword();
+      await searchPassword();
       break;
 
     case "Save a new password":
-      newPassword();
+      await newPassword();
       break;
   }
-  dbClose();
+  await dbClose();
 }
 main();
