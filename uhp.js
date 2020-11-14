@@ -1,20 +1,19 @@
 require("dotenv").config();
 
 const inquirer = require("inquirer");
-const { dbConnect, dbClose, dbCollection } = require("./lib/database");
+const { dbConnect, dbClose } = require("./lib/database");
 const {
   askForMasterPassword,
   searchPassword,
   newPassword,
 } = require("./lib/interaction");
-const { readMasterPassword } = require("./lib/passwords");
 
 async function main() {
   await dbConnect(process.env.DB_URI, process.env.DB_NAME);
 
   const masterPassword = await askForMasterPassword();
 
-  if (masterPassword !== (await readMasterPassword())) {
+  if (masterPassword !== process.env.PWD_MASTER) {
     console.error("Do it right next time ...");
     main();
     return;
