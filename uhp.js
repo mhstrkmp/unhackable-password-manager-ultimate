@@ -1,10 +1,7 @@
+require("dotenv").config();
+
 const inquirer = require("inquirer");
-const {
-  readMongoDbPassword,
-  dbConnect,
-  dbClose,
-  dbCollection,
-} = require("./lib/database");
+const { dbConnect, dbClose, dbCollection } = require("./lib/database");
 const {
   askForMasterPassword,
   searchPassword,
@@ -13,12 +10,8 @@ const {
 const { readMasterPassword } = require("./lib/passwords");
 
 async function main() {
-  // Start Temporary Solution
-  const password = await readMongoDbPassword();
-  const url = `mongodb+srv://mhstrkmp:${password}@cluster0.4gbgq.mongodb.net/uhp?retryWrites=true`;
-  // End Temporary Solution
+  await dbConnect(process.env.DB_URI, process.env.DB_NAME);
 
-  await dbConnect(url, "test");
   const masterPassword = await askForMasterPassword();
 
   if (masterPassword !== (await readMasterPassword())) {
