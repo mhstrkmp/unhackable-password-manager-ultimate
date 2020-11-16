@@ -24,7 +24,11 @@ async function main() {
       type: "list",
       name: "mainMenu",
       message: "What do you want to do?",
-      choices: ["Search for a password.", "Save a new password"],
+      choices: [
+        "Search for a password.",
+        "Save a new password",
+        "Delete a Password",
+      ],
     },
   ]);
 
@@ -35,6 +39,14 @@ async function main() {
 
     case "Save a new password":
       await newPassword();
+      break;
+
+    /* case "Delete a Password":
+      await deletePassword();
+      break; */
+
+    default:
+      console.log("That didn't work ...");
       break;
   }
   await dbClose();
