@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const { getPassword, setPassword } = require("./lib/passwords");
-const { dbConnect, updatePassword, deletePassword } = require("./lib/database");
+const { dbConnect, deletePassword } = require("./lib/database");
 
 const app = express();
 app.use(express.json());
