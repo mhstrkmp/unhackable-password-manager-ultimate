@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { getPassword } from "./api/passwords";
-import useAsync from "./hooks/useAsync";
+// import useAsync from "./hooks/useAsync";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -26,7 +26,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        {loading && <div>Loading...</div>}
+        {/* {loading && <div>Loading...</div>} */}
         {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* include validation with required or other standard HTML validation rules */}
