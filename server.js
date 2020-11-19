@@ -91,8 +91,6 @@ const path = require("path");
 const { getPassword, setPassword } = require("./lib/passwords");
 const { dbConnect, deletePassword } = require("./lib/database");
 
-const { getPassword, setPassword } = require("./lib/passwords");
-
 const app = express();
 app.use(express.json());
 const port = process.env.PORT || 3600;
