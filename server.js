@@ -88,13 +88,10 @@ const express = require("express");
 
 const path = require("path");
 
-const {
-  getPassword,
-  setPassword,
-  getPasswords,
-  deletePassword,
-} = require("./lib/passwords");
-const { connect } = require("./lib/database");
+const { getPassword, setPassword } = require("./lib/passwords");
+const { dbConnect, deletePassword } = require("./lib/database");
+
+const { getPassword, setPassword } = require("./lib/passwords");
 
 const app = express();
 app.use(express.json());
@@ -173,12 +170,10 @@ app.get("*", (request, response) => {
 
 async function run() {
   console.log("Connecting to database...");
-  await connect(process.env.MONGO_DB_URI, process.env.MONGO_DB_NAME);
+  await dbConnect(process.env.DB_URI, process.env.DB_NAME);
   console.log("Connected to database 🎉");
-
   app.listen(port, () => {
-    console.log(`PW4U API listening at http://localhost:${port}`);
+    console.log(`UHP API listening at http://localhost:${port}`);
   });
 }
-
 run();
