@@ -6,21 +6,21 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-  const { data, loading, error, doFetch } = useAsync(() =>
-    getPassword("banking")
-  );
+  // const { data, loading, error, doFetch } = useAsync(() =>
+  //   getPassword("banking")
+  // );
 
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = (data) => {
-    getPassword(data);
+    getPassword(data.fetchPassword);
     console.log(getPassword(data));
   };
 
   console.log(watch("fetchPassword")); // watch input value by passing the name of it
 
-  useEffect(() => {
-    doFetch();
-  }, []);
+  // useEffect(() => {
+  //   doFetch();
+  // }, []);
 
   return (
     <div className="App">
