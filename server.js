@@ -18,7 +18,7 @@ app.get("/api/passwords/:name", async (request, response) => {
         .send("Could not find the password you have specified");
       return;
     }
-    response.send(passwordValue);
+    response.send(passwordValue.pwd);
   } catch (error) {
     console.error(error);
     response.status(500).send("An internal server error occured");
